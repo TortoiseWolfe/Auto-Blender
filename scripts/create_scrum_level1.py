@@ -18,26 +18,47 @@ from mathutils import Vector
 
 # Auto-detect output directory relative to script location
 import os
+import glob
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.dirname(SCRIPT_DIR)  # Go up from scripts/ to repo root
 
 # Output directories (relative to repo root)
 BLEND_DIR = os.path.join(REPO_ROOT, "blend")
 PREVIEW_DIR = os.path.join(REPO_ROOT, "previews")
+REFERENCE_DIR = os.path.join(REPO_ROOT, "reference")
+
+# Reference image for photo-matching
+REFERENCE_IMAGE = os.path.join(REFERENCE_DIR, "scrum_level1_target.png")
 
 PREVIEW_RENDER = True
 SAVE_BLEND = True
+USE_REFERENCE_BG = True  # Load reference image as camera background
 
-# Colors (hex)
+def get_next_version():
+    """Find next version number for preview files"""
+    existing = glob.glob(os.path.join(PREVIEW_DIR, "scrum_level1_v*.png"))
+    if not existing:
+        return 1
+    versions = []
+    for f in existing:
+        try:
+            v = int(os.path.basename(f).replace("scrum_level1_v", "").replace(".png", ""))
+            versions.append(v)
+        except:
+            pass
+    return max(versions) + 1 if versions else 1
+
+# Colors (hex) - v007: VIBRANT pink like reference
 COLORS = {
-    "baby_pink": "#FFB6C1",
-    "snout_pink": "#E8A0AD", 
+    "baby_pink": "#FF6B8A",  # Strong saturated pink
+    "snout_pink": "#FF5577",
     "eye_white": "#FFFFFF",
     "pupil_black": "#1A1A1A",
     "eye_gold": "#D4A017",
-    "nostril_dark": "#C97080",
-    "hoof_pink": "#F0A0B0",
+    "nostril_dark": "#993344",  # Dark contrast
+    "hoof_pink": "#FF7799",
     "lacing_white": "#FFFFFF",
+    "cheek_blush": "#FF5566",  # Visible coral blush
 }
 
 # =============================================================================
@@ -100,12 +121,12 @@ def create_body():
     body = bpy.context.active_object
     body.name = "Body"
     
-    # Scale to football/egg shape
-    body.scale = (1.4, 0.9, 0.85)
+    # Scale to football/egg shape (v004: balanced - not so long it hides snout)
+    body.scale = (1.3, 0.95, 0.9)
     bpy.ops.object.transform_apply(scale=True)
     
-    # Apply material
-    mat = create_material("BabyPink", COLORS["baby_pink"])
+    # Apply material (v007: lower roughness 0.3 for more vibrant pink)
+    mat = create_material("BabyPink", COLORS["baby_pink"], roughness=0.3)
     apply_material(body, mat)
     
     # Smooth shading
@@ -164,90 +185,171 @@ def create_nostrils():
 
 
 def create_eyes():
-    """Create eyes with pupils - positioned close together near snout"""
+    """Create eyes on FRONT of face - both visible from 3/4 view like reference"""
     eyes = []
-    
-    for i, y_offset in enumerate([0.25, -0.25]):
-        # Eye white
+
+    # v005: Eyes on FRONT of face - LARGER like reference with visible white
+    eye_configs = [
+        # Left eye (near camera) - on front-left of face
+        {"side": "L", "white": (0.85, 0.28, 0.25), "iris": (0.98, 0.32, 0.27), "pupil": (1.06, 0.34, 0.28)},
+        # Right eye (far camera) - on front-right of face
+        {"side": "R", "white": (0.85, -0.28, 0.25), "iris": (0.98, -0.32, 0.27), "pupil": (1.06, -0.34, 0.28)},
+    ]
+
+    for i, config in enumerate(eye_configs):
+        # Eye white - LARGER for cartoon look
         bpy.ops.mesh.primitive_uv_sphere_add(
-            segments=12,
-            ring_count=8,
-            radius=0.18,
-            location=(0.9, y_offset, 0.35)
+            segments=14,
+            ring_count=10,
+            radius=0.28,  # v005: bigger eyes
+            location=config["white"]
         )
         eye = bpy.context.active_object
-        eye.name = f"Eye_{'L' if i == 0 else 'R'}"
-        
-        mat = create_material(f"EyeWhite_{i}", COLORS["eye_white"], roughness=0.3)
+        eye.name = f"Eye_{config['side']}"
+
+        mat = create_material(f"EyeWhite_{i}", COLORS["eye_white"], roughness=0.2)
         apply_material(eye, mat)
         bpy.ops.object.shade_smooth()
         eyes.append(eye)
-        
-        # Iris (gold)
+
+        # Iris (gold) - facing outward/forward - LARGER
         bpy.ops.mesh.primitive_uv_sphere_add(
-            segments=10,
-            ring_count=6,
-            radius=0.12,
-            location=(1.0, y_offset * 0.9, 0.38)
+            segments=12,
+            ring_count=8,
+            radius=0.18,  # v005: bigger iris
+            location=config["iris"]
         )
         iris = bpy.context.active_object
-        iris.name = f"Iris_{'L' if i == 0 else 'R'}"
-        
-        mat = create_material(f"IrisGold_{i}", COLORS["eye_gold"], roughness=0.4)
+        iris.name = f"Iris_{config['side']}"
+
+        mat = create_material(f"IrisGold_{i}", COLORS["eye_gold"], roughness=0.3)
         apply_material(iris, mat)
         bpy.ops.object.shade_smooth()
         eyes.append(iris)
-        
-        # Pupil (black)
+
+        # Pupil (black) - centered on iris, facing outward - LARGER
         bpy.ops.mesh.primitive_uv_sphere_add(
-            segments=8,
-            ring_count=6,
-            radius=0.07,
-            location=(1.08, y_offset * 0.85, 0.40)
+            segments=10,
+            ring_count=8,
+            radius=0.10,  # v005: bigger pupil
+            location=config["pupil"]
         )
         pupil = bpy.context.active_object
-        pupil.name = f"Pupil_{'L' if i == 0 else 'R'}"
-        
+        pupil.name = f"Pupil_{config['side']}"
+
         mat = create_material(f"PupilBlack_{i}", COLORS["pupil_black"], roughness=0.5)
         apply_material(pupil, mat)
         bpy.ops.object.shade_smooth()
         eyes.append(pupil)
-    
+
     return eyes
 
 
-def create_ears():
-    """Create small floppy ears pointing downward"""
-    ears = []
-    
-    for i, y_offset in enumerate([0.55, -0.55]):
+def create_eyebrows():
+    """v005: Create eyebrows for worried/concerned expression per FR-011"""
+    eyebrows = []
+    # Use darker pink for eyebrows to stand out
+    mat = create_material("EyebrowPink", "#E896A8", roughness=0.5)
+
+    # Two eyebrows above eyes - WORRIED look means inner edges UP
+    # (opposite of angry which has inner edges down)
+    eyebrow_configs = [
+        # Left eyebrow - inner edge (toward center) tilts UP for worried
+        {"side": "L", "loc": (1.0, 0.18, 0.52), "rot": (math.radians(10), math.radians(-15), math.radians(25))},
+        # Right eyebrow - mirror of left
+        {"side": "R", "loc": (1.0, -0.18, 0.52), "rot": (math.radians(10), math.radians(15), math.radians(-25))},
+    ]
+
+    for config in eyebrow_configs:
+        # Use flattened sphere for eyebrow shape - BIGGER
         bpy.ops.mesh.primitive_uv_sphere_add(
             segments=8,
             ring_count=6,
-            radius=0.25,
-            location=(-0.3, y_offset, 0.5)
+            radius=0.10,  # v005: bigger
+            location=config["loc"]
+        )
+        eyebrow = bpy.context.active_object
+        eyebrow.name = f"Eyebrow_{config['side']}"
+
+        # Flatten and elongate for eyebrow shape - more prominent
+        eyebrow.scale = (2.0, 0.5, 0.4)
+        eyebrow.rotation_euler = config["rot"]
+        bpy.ops.object.transform_apply(scale=True, rotation=True)
+
+        apply_material(eyebrow, mat)
+        bpy.ops.object.shade_smooth()
+        eyebrows.append(eyebrow)
+
+    return eyebrows
+
+
+def create_cheek_blush():
+    """v005: Create pink cheek blush marks for cuteness per FR-012"""
+    blushes = []
+    # Use a more visible coral/orange-pink for blush
+    mat = create_material("CheekBlush", "#FF9999", roughness=0.6)
+
+    # Two oval blush marks below eyes - pushed FORWARD
+    blush_configs = [
+        # Left cheek - below left eye
+        {"side": "L", "loc": (1.05, 0.40, 0.05)},
+        # Right cheek - below right eye
+        {"side": "R", "loc": (1.05, -0.40, 0.05)},
+    ]
+
+    for config in blush_configs:
+        # Flattened sphere for blush - slightly larger
+        bpy.ops.mesh.primitive_uv_sphere_add(
+            segments=10,
+            ring_count=8,
+            radius=0.10,
+            location=config["loc"]
+        )
+        blush = bpy.context.active_object
+        blush.name = f"CheekBlush_{config['side']}"
+
+        # Flatten to sit on face surface, make oval
+        blush.scale = (0.3, 0.6, 0.25)
+        bpy.ops.object.transform_apply(scale=True)
+
+        apply_material(blush, mat)
+        bpy.ops.object.shade_smooth()
+        blushes.append(blush)
+
+    return blushes
+
+
+def create_ears():
+    """Create ears pointing UP and BACK like reference image"""
+    ears = []
+
+    for i, y_offset in enumerate([0.65, -0.65]):
+        # Cone shape for pointy pig ears
+        bpy.ops.mesh.primitive_cone_add(
+            vertices=12,
+            radius1=0.18,
+            radius2=0.02,
+            depth=0.35,
+            location=(-0.2, y_offset, 0.55)
         )
         ear = bpy.context.active_object
         ear.name = f"Ear_{'L' if i == 0 else 'R'}"
-        
-        # Flatten and shape
-        ear.scale = (0.6, 0.3, 0.8)
-        
-        # Rotate to point down and out (floppy)
+
+        # Rotate to point UP and slightly BACK
         ear.rotation_euler = (
-            math.radians(20),      # tip forward
-            math.radians(30 * (1 if i == 0 else -1)),  # out to sides
-            math.radians(-40 * (1 if i == 0 else -1))  # droop down
+            math.radians(-30),     # Tilt back
+            math.radians(25 * (1 if i == 0 else -1)),  # Angle outward
+            math.radians(10 * (1 if i == 0 else -1))   # Slight twist
         )
-        
-        bpy.ops.object.transform_apply(scale=True, rotation=True)
-        
+
+        bpy.ops.object.transform_apply(rotation=True)
+
         mat = create_material(f"EarPink_{i}", COLORS["baby_pink"])
         apply_material(ear, mat)
         bpy.ops.object.shade_smooth()
-        
+
         ears.append(ear)
-    
+
     return ears
 
 
@@ -306,36 +408,48 @@ def create_hooves():
 
 
 def create_lacing():
-    """Create white football lacing along the spine"""
-    # Main vertical line
-    bpy.ops.mesh.primitive_cube_add(
-        size=1,
-        location=(0, 0, 0.88)
-    )
-    lacing_main = bpy.context.active_object
-    lacing_main.name = "Lacing_Main"
-    lacing_main.scale = (1.2, 0.03, 0.03)
-    bpy.ops.object.transform_apply(scale=True)
-    
+    """Create HORIZONTAL white football lacing stripes across body like reference"""
     mat = create_material("LacingWhite", COLORS["lacing_white"])
-    apply_material(lacing_main, mat)
-    
-    # Cross stitches
-    stitches = []
-    for i, x_pos in enumerate([-0.3, 0, 0.3]):
+    laces = []
+
+    # Two main horizontal stripes wrapping around the body
+    stripe_positions = [0.3, -0.4]  # X positions along the body
+
+    for i, x_pos in enumerate(stripe_positions):
+        # Create a torus for a stripe that wraps around
+        # v003: Increased minor_radius from 0.025 to 0.04 per T003/FR-005
+        bpy.ops.mesh.primitive_torus_add(
+            major_radius=0.82,  # Radius around body
+            minor_radius=0.04,  # Thickness of stripe (v003: increased)
+            major_segments=32,
+            minor_segments=8,
+            location=(x_pos, 0, 0)
+        )
+        stripe = bpy.context.active_object
+        stripe.name = f"Lacing_Stripe_{i}"
+
+        # Rotate to wrap around body (Y-axis ring)
+        stripe.rotation_euler = (0, math.radians(90), 0)
+        bpy.ops.object.transform_apply(rotation=True)
+
+        apply_material(stripe, mat)
+        laces.append(stripe)
+
+    # Add small cross-stitches between the stripes (on top)
+    # v003: Increased scale from (0.5, 0.03, 0.03) to (0.6, 0.05, 0.05) per T004
+    for i, x_pos in enumerate([-0.05]):
         bpy.ops.mesh.primitive_cube_add(
             size=1,
-            location=(x_pos, 0, 0.9)
+            location=(x_pos, 0, 0.85)
         )
         stitch = bpy.context.active_object
         stitch.name = f"Lacing_Stitch_{i}"
-        stitch.scale = (0.03, 0.15, 0.02)
+        stitch.scale = (0.6, 0.05, 0.05)  # v003: increased visibility
         bpy.ops.object.transform_apply(scale=True)
-        
         apply_material(stitch, mat)
-        stitches.append(stitch)
-    
-    return [lacing_main] + stitches
+        laces.append(stitch)
+
+    return laces
 
 
 def create_parent_empty():
@@ -358,18 +472,31 @@ def parent_all_to_empty(parent):
 # =============================================================================
 
 def setup_camera():
-    """Set up camera for preview render"""
+    """Set up camera for preview render - 3/4 front-right view to match reference"""
+    # Position camera for 3/4 front-right view (matching HogBall logo reference)
     bpy.ops.object.camera_add(
-        location=(4, -4, 2.5)
+        location=(3.5, -2.5, 1.0)  # Front-right, slightly above
     )
     camera = bpy.context.active_object
     camera.name = "PreviewCamera"
-    
-    # Point at origin
-    direction = Vector((0, 0, 0)) - camera.location
+
+    # Point at pig's face area (slightly forward of origin)
+    target = Vector((0.3, 0, 0.1))
+    direction = target - camera.location
     camera.rotation_euler = direction.to_track_quat('-Z', 'Y').to_euler()
-    
+
+    # Set as active camera
     bpy.context.scene.camera = camera
+
+    # Load reference image as background if enabled
+    if USE_REFERENCE_BG and os.path.exists(REFERENCE_IMAGE):
+        camera.data.show_background_images = True
+        bg = camera.data.background_images.new()
+        bg.image = bpy.data.images.load(REFERENCE_IMAGE)
+        bg.alpha = 0.5  # Semi-transparent for comparison
+        bg.display_depth = 'BACK'
+        print(f"Loaded reference background: {REFERENCE_IMAGE}")
+
     return camera
 
 
@@ -409,8 +536,9 @@ def setup_render_settings():
     # Transparent background
     scene.render.film_transparent = True
     
-    # Use Cycles for better quality (or EEVEE for speed)
-    scene.render.engine = 'BLENDER_EEVEE'
+    # Use Cycles for better color reproduction (v005: EEVEE washes out pink)
+    scene.render.engine = 'CYCLES'
+    scene.cycles.samples = 64  # Lower samples for faster preview
     
     return scene
 
@@ -439,7 +567,13 @@ def main():
     
     print("Creating eyes...")
     eyes = create_eyes()
-    
+
+    print("Creating eyebrows...")  # v003: FR-011
+    eyebrows = create_eyebrows()
+
+    print("Creating cheek blush...")  # v003: FR-012
+    cheek_blush = create_cheek_blush()
+
     print("Creating ears...")
     ears = create_ears()
     
@@ -467,23 +601,28 @@ def main():
     os.makedirs(BLEND_DIR, exist_ok=True)
     os.makedirs(PREVIEW_DIR, exist_ok=True)
 
-    # Save blend file
+    # Get version number for this iteration
+    version = get_next_version()
+    version_str = f"v{version:03d}"
+    print(f"Iteration: {version_str}")
+
+    # Save blend file (versioned)
     if SAVE_BLEND:
-        blend_path = os.path.join(BLEND_DIR, "scrum_level1.blend")
+        blend_path = os.path.join(BLEND_DIR, f"scrum_level1_{version_str}.blend")
         bpy.ops.wm.save_as_mainfile(filepath=blend_path)
         print(f"Saved: {blend_path}")
 
-    # Render preview
+    # Render preview (versioned)
     if PREVIEW_RENDER:
-        preview_path = os.path.join(PREVIEW_DIR, "scrum_level1_preview.png")
+        preview_path = os.path.join(PREVIEW_DIR, f"scrum_level1_{version_str}.png")
         scene.render.filepath = preview_path
         bpy.ops.render.render(write_still=True)
         print(f"Preview rendered: {preview_path}")
 
     print("=" * 50)
-    print("DONE!")
-    print(f"Blend file: {BLEND_DIR}")
-    print(f"Preview: {PREVIEW_DIR}")
+    print(f"DONE! Version: {version_str}")
+    print(f"Blend: {BLEND_DIR}/scrum_level1_{version_str}.blend")
+    print(f"Preview: {PREVIEW_DIR}/scrum_level1_{version_str}.png")
     print("=" * 50)
 
 
