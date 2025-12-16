@@ -1,6 +1,6 @@
 #!/bin/bash
 # Auto-Blender: WSL2 -> Windows Blender wrapper
-# Usage: ./blender.sh scripts/create_scrum_level1.py
+# Usage: ./blender.sh scripts/create_pig_level1.py
 
 BLENDER="/mnt/c/Program Files/Blender Foundation/Blender 5.0/blender.exe"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -15,7 +15,7 @@ fi
 # Check for script argument
 if [ -z "$1" ]; then
     echo "Usage: ./blender.sh <script.py>"
-    echo "Example: ./blender.sh scripts/create_scrum_level1.py"
+    echo "Example: ./blender.sh scripts/create_pig_level1.py"
     exit 1
 fi
 

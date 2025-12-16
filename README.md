@@ -1,10 +1,56 @@
-# Auto-Blender - HogBall Mascot Generator
+# Auto-Blender - Character Pipeline
 
-## Pig Model Download Links
+Procedural 3D character generation using Blender's Python API. Currently focused on stylized pig characters.
 
-These sources have free/CC0 pig models. Download manually since CAPTCHA blocks automated downloads:
+## Project Structure
 
-### poly.pizza (CC-BY, requires manual download due to CAPTCHA)
+```
+reference/           # Reference images (empty - add your own)
+scripts/             # Blender Python scripts
+models/              # Downloaded 3D models (CC0/CC-BY)
+previews/            # Render outputs
+blend/               # Exported .blend files
+```
+
+## Usage
+
+```bash
+# Generate pig character
+./blender.sh scripts/create_pig_level1.py
+
+# Compare pig models
+./blender.sh scripts/compare_all_pigs.py
+```
+
+---
+
+## Free 3D Model Sources
+
+### CC0 (No Attribution Required)
+
+| Site | URL | Notes |
+|------|-----|-------|
+| **Quaternius** | https://quaternius.com | High-quality low-poly game assets, direct downloads |
+| **Kenney** | https://kenney.nl/assets/animal-pack-redux | Professional quality, completely free |
+| **Poly Haven** | https://polyhaven.com | Best for materials/HDRIs, few animal models |
+| **OpenGameArt** | https://opengameart.org | Game-focused, check individual licenses |
+
+### CC-BY (Attribution Required)
+
+| Site | URL | Notes |
+|------|-----|-------|
+| **Poly Pizza** | https://poly.pizza | Large library, CAPTCHA blocks automation |
+| **Sketchfab** | https://sketchfab.com | Filter by downloadable + CC0/CC-BY |
+| **Blend Swap** | https://blendswap.com | Blender-native files |
+
+### Direct Links - Pig Models
+
+**Quaternius (CC0):**
+- Farm Animals: https://quaternius.com/packs/farmanimal.html
+- Ultimate Animated Animals: https://quaternius.com/packs/ultimateanimatedanimals.html
+- All Packs: https://quaternius.com/index.html
+
+**Poly Pizza (CC-BY 3.0):**
 - Pig by Poly by Google: https://poly.pizza/m/6XC3XssJIU_
 - Pig by Poly by Google #2: https://poly.pizza/m/brcb6xLELnz
 - Pig by Poly by Google #3: https://poly.pizza/m/6yc3isbjZST
@@ -19,173 +65,45 @@ These sources have free/CC0 pig models. Download manually since CAPTCHA blocks a
 - Piggy Bank by CreativeTrio: https://poly.pizza/m/1KAexv0Erv
 - Collared Peccary by Poly by Google: https://poly.pizza/m/3eoOcw_d00X
 
-### Quaternius (CC0, direct download)
-- Farm Animals Pack: https://quaternius.com/packs/farmpack.html
-- Ultimate Animated Animals: https://quaternius.com/packs/ultimateanimatedanimals.html
-- All Packs: https://quaternius.com/index.html
+**OpenGameArt:**
+- Pig search: https://opengameart.org/art-search-advanced?keys=pig&field_art_type_tid%5B%5D=10
 
-### Other Sources
-- OpenGameArt Pigs: https://opengameart.org/art-search-advanced?keys=pig&field_art_type_tid%5B%5D=10
-- Sketchfab (filter CC0): https://sketchfab.com/search?features=downloadable&licenses=322a749bcfa841b29dff1571c1d5b317&licenses=b9ddc40b93e34cdca1fc152f39b9f375&q=pig&type=models
-- Kenney Animal Pack: https://kenney.nl/assets/animal-pack-redux
-- TurboSquid Free: https://www.turbosquid.com/Search/3D-Models/free/pig
+**Sketchfab (CC0 filter):**
+- Pig search: https://sketchfab.com/search?features=downloadable&licenses=322a749bcfa841b29dff1571c1d5b317&licenses=b9ddc40b93e34cdca1fc152f39b9f375&q=pig&type=models
 
-### Currently Downloaded (in models/ folder)
-1. `lowpoly_pig.blend` - Low poly pig model
-2. `porco.blend` - Porco pig model
-3. `Farm Animals by @Quaternius/Blends/Pig.blend` - Quaternius farm pig (also OBJ, FBX)
+**TurboSquid Free:**
+- Pig search: https://www.turbosquid.com/Search/3D-Models/free/pig
 
-## Usage
+### Currently Downloaded
 
-Place downloaded GLB/GLTF/blend files in `models/polypizza/` or `models/downloads/`, then run:
-```bash
-./blender.sh scripts/compare_all_pigs.py
-```
+- `models/cc0/Farm Animals by @Quaternius/` - Pig, Pug, Sheep (Blends, FBX, OBJ)
 
 ---
 
-# SpecKit Project Template
+## AI 3D Generation Tools
 
-Constitution  
-Specify  
-Clarify  
-Plan  
-Checklist  
-Task  
-Analyze  
-Implement  
+| Tool | Free Tier | Downloads | Notes |
+|------|-----------|-----------|-------|
+| **Meshy** | 100 credits/month | **NO** | Generate only; download requires paid upgrade |
+| **Tripo3D** | 300 credits/month | **NO** | Generate only; no commercial use |
+| **Sloyd** | Editor access | **NO** | Explore only; no usable exports |
 
-This template provides a Docker-based setup for [GitHub SpecKit](https://github.com/github/spec-kit) - a spec-driven development toolkit that helps you create, plan, and implement features using AI-assisted workflows.
+**Verdict:** None offer free downloads. All require paid tier to export models. Use CC0 sites (Quaternius, Kenney) instead.
 
-## What This Template Provides
+---
 
-- **No local Python/UV required** - Everything runs in Docker containers
-- **Auto-installation** - SpecKit installs automatically on first use
-- **Claude Code integration** - Slash commands for spec-driven development
-- **Project templates** - Pre-configured structure for specifications, plans, and tasks
+## SpecKit Workflow
 
-## Requirements
-
-- Docker
-- Docker Compose
-
-That's it! No Python, UV, or other dependencies needed on your local machine.
-
-## Quick Start
-
-### 1. Create a New Project
+This project uses [SpecKit](https://github.com/github/spec-kit) for spec-driven development.
 
 ```bash
-# Copy the template to your new project location
-cp -r /home/turtle_wolfe/repos/speckit-template /path/to/your-new-project
-cd /path/to/your-new-project
-
-# Run any specify command - this auto-installs everything on first run
-./specify --help
+./specify --help    # Show available commands
 ```
 
-### 2. What Happens on First Run
+### Slash Commands (in Claude Code)
 
-When you run `./specify` for the first time:
-
-1. **Installs SpecKit** - Downloads and installs SpecKit CLI in `.speckit/` directory
-2. **Initializes Project** - Creates `.specify/` with templates and configuration
-3. **Sets up Claude Code** - Adds slash commands to `.claude/commands/`
-
-This takes a minute or two. Subsequent runs are instant.
-
-## Available Slash Commands
-
-After initialization, use these commands in Claude Code:
-
-### Core Workflow
-
-1. `/speckit.constitution` - Establish project principles and values
-2. `/speckit.specify` - Create baseline specification for features
-3. `/speckit.plan` - Create detailed implementation plan
-4. `/speckit.tasks` - Generate actionable task list
+1. `/speckit.constitution` - Project principles
+2. `/speckit.specify` - Create feature spec
+3. `/speckit.plan` - Implementation plan
+4. `/speckit.tasks` - Generate task list
 5. `/speckit.implement` - Execute implementation
-
-### Optional Enhancement Commands
-
-- `/speckit.clarify` - Ask structured questions to clarify requirements (run before planning)
-- `/speckit.analyze` - Cross-artifact consistency analysis (run after tasks, before implementation)
-- `/speckit.checklist` - Generate quality checklists (run after planning)
-
-## Using the Specify CLI
-
-You can also use SpecKit's CLI directly:
-
-```bash
-./specify --help           # Show help
-./specify init --help      # Show initialization options
-./specify check            # Check required tools
-```
-
-## Updating SpecKit
-
-To update to the latest version of SpecKit:
-
-```bash
-./specify update
-```
-
-This removes the current installation and reinstalls from the latest version on GitHub.
-
-## File Structure
-
-```
-your-project/
-├── .claude/              # Claude Code configuration and slash commands
-│   └── commands/         # Auto-generated slash commands
-├── .specify/             # SpecKit templates and configuration
-│   ├── memory/           # Project constitution
-│   ├── templates/        # Spec, plan, and task templates
-│   └── scripts/          # Helper scripts
-├── .speckit/             # SpecKit installation (auto-generated)
-├── docker-compose.yml    # Docker configuration
-├── specify*              # Main wrapper script
-├── .gitignore           # Excludes .speckit/ and .specify/
-└── README.md            # This file
-```
-
-### What to Commit to Git
-
-**Commit these:**
-- `docker-compose.yml`
-- `specify` script
-- `README.md`
-- `.gitignore`
-
-**Don't commit these** (already in .gitignore):
-- `.speckit/` - Installation files, regenerated automatically
-- `.specify/` - Templates and config, regenerated on init
-
-## How It Works
-
-The `specify` wrapper script:
-
-1. Checks if Docker is running
-2. Installs SpecKit in `.speckit/` if not present
-3. Initializes project structure in `.specify/` if not present
-4. Runs your command in a Docker container
-
-All SpecKit files stay in your project directory, persisting between runs.
-
-## Troubleshooting
-
-### "Cannot connect to Docker daemon"
-Make sure Docker is running.
-
-### Permission errors on files
-Run `./specify update` to clean and reinstall.
-
-### Slash commands not appearing
-Make sure you're using Claude Code and the `.claude/commands/` directory exists.
-
-## Learn More
-
-- [SpecKit Documentation](https://github.com/github/spec-kit)
-- [Spec-Driven Development Guide](https://github.com/github/spec-kit/blob/main/docs/spec-driven-development.md)
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
-# SpecKitTemplate

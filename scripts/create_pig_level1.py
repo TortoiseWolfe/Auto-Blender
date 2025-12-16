@@ -1,9 +1,9 @@
 """
-HogBall - Scrum Level 1: Baby Pig
+Procedural Pig Character - Level 1: Baby Pig
 Blender Python Script
 
-Run with: blender --background --python create_scrum_level1.py
-Or with GUI: blender --python create_scrum_level1.py
+Run with: blender --background --python create_pig_level1.py
+Or with GUI: blender --python create_pig_level1.py
 
 This is a STARTER TEMPLATE - iterate on proportions and shapes!
 """
@@ -28,7 +28,7 @@ PREVIEW_DIR = os.path.join(REPO_ROOT, "previews")
 REFERENCE_DIR = os.path.join(REPO_ROOT, "reference")
 
 # Reference image for photo-matching
-REFERENCE_IMAGE = os.path.join(REFERENCE_DIR, "scrum_level1_target.png")
+REFERENCE_IMAGE = os.path.join(REFERENCE_DIR, "pig_level1_target.png")
 
 PREVIEW_RENDER = True
 SAVE_BLEND = True
@@ -36,13 +36,13 @@ USE_REFERENCE_BG = True  # Load reference image as camera background
 
 def get_next_version():
     """Find next version number for preview files"""
-    existing = glob.glob(os.path.join(PREVIEW_DIR, "scrum_level1_v*.png"))
+    existing = glob.glob(os.path.join(PREVIEW_DIR, "pig_level1_v*.png"))
     if not existing:
         return 1
     versions = []
     for f in existing:
         try:
-            v = int(os.path.basename(f).replace("scrum_level1_v", "").replace(".png", ""))
+            v = int(os.path.basename(f).replace("pig_level1_v", "").replace(".png", ""))
             versions.append(v)
         except:
             pass
@@ -456,7 +456,7 @@ def create_parent_empty():
     """Create parent empty for all parts"""
     bpy.ops.object.empty_add(type='PLAIN_AXES', location=(0, 0, 0))
     parent = bpy.context.active_object
-    parent.name = "Scrum_Level1"
+    parent.name = "Pig_Level1"
     return parent
 
 
@@ -473,7 +473,7 @@ def parent_all_to_empty(parent):
 
 def setup_camera():
     """Set up camera for preview render - 3/4 front-right view to match reference"""
-    # Position camera for 3/4 front-right view (matching HogBall logo reference)
+    # Position camera for 3/4 front-right view
     bpy.ops.object.camera_add(
         location=(3.5, -2.5, 1.0)  # Front-right, slightly above
     )
@@ -549,7 +549,7 @@ def setup_render_settings():
 
 def main():
     print("=" * 50)
-    print("Creating Scrum Level 1: Baby Pig")
+    print("Creating Pig Level 1: Baby Pig")
     print("=" * 50)
     
     # Clear existing scene
@@ -608,21 +608,21 @@ def main():
 
     # Save blend file (versioned)
     if SAVE_BLEND:
-        blend_path = os.path.join(BLEND_DIR, f"scrum_level1_{version_str}.blend")
+        blend_path = os.path.join(BLEND_DIR, f"pig_level1_{version_str}.blend")
         bpy.ops.wm.save_as_mainfile(filepath=blend_path)
         print(f"Saved: {blend_path}")
 
     # Render preview (versioned)
     if PREVIEW_RENDER:
-        preview_path = os.path.join(PREVIEW_DIR, f"scrum_level1_{version_str}.png")
+        preview_path = os.path.join(PREVIEW_DIR, f"pig_level1_{version_str}.png")
         scene.render.filepath = preview_path
         bpy.ops.render.render(write_still=True)
         print(f"Preview rendered: {preview_path}")
 
     print("=" * 50)
     print(f"DONE! Version: {version_str}")
-    print(f"Blend: {BLEND_DIR}/scrum_level1_{version_str}.blend")
-    print(f"Preview: {PREVIEW_DIR}/scrum_level1_{version_str}.png")
+    print(f"Blend: {BLEND_DIR}/pig_level1_{version_str}.blend")
+    print(f"Preview: {PREVIEW_DIR}/pig_level1_{version_str}.png")
     print("=" * 50)
 
 

@@ -1,8 +1,8 @@
 """
-Create HogBall Hybrid - Football-shaped pig mascot
+Create Pig Hybrid - Football-shaped pig character
 Uses Quaternius pig as base, rotates forward, applies pink materials, adds football lacing
 
-Run with: ./blender.sh scripts/create_hogball_hybrid.py
+Run with: ./blender.sh scripts/create_pig_hybrid.py
 """
 
 import bpy
@@ -18,8 +18,8 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.dirname(SCRIPT_DIR)
 MODELS_DIR = os.path.join(REPO_ROOT, "models")
 PREVIEW_DIR = os.path.join(REPO_ROOT, "previews")
-OUTPUT_FILE = os.path.join(PREVIEW_DIR, "hogball_hybrid_v005.png")
-BLEND_OUTPUT = os.path.join(MODELS_DIR, "hogball_hybrid.blend")
+OUTPUT_FILE = os.path.join(PREVIEW_DIR, "pig_hybrid_v005.png")
+BLEND_OUTPUT = os.path.join(MODELS_DIR, "pig_hybrid.blend")
 
 # Source model
 SOURCE_MODEL = os.path.join(MODELS_DIR, "Farm Animals by @Quaternius/Blends/Pig.blend")
@@ -126,7 +126,7 @@ def center_pig(objects):
 
 def apply_pink_material(objects):
     """Apply bright pink material to pig"""
-    pink_mat = create_material("HogBall_Pink", PINK_BODY, roughness=0.6)
+    pink_mat = create_material("Pig_Pink", PINK_BODY, roughness=0.6)
 
     for obj in objects:
         if obj.type == 'MESH':
@@ -267,7 +267,7 @@ def setup_camera():
     # Position camera much further back for full pig view
     bpy.ops.object.camera_add(location=(8.0, -12.0, 6.0))
     camera = bpy.context.active_object
-    camera.name = "HogBallCamera"
+    camera.name = "MainCamera"
 
     # Point at pig center
     bpy.ops.object.empty_add(location=(0, 0, 1.5))
@@ -335,7 +335,7 @@ def setup_render():
 
 def main():
     print("=" * 70)
-    print("HOGBALL HYBRID - Creating Football Pig Mascot")
+    print("PIG HYBRID - Creating Football Pig Character")
     print("=" * 70)
 
     # Clear scene
@@ -385,7 +385,7 @@ def main():
     bpy.ops.render.render(write_still=True)
 
     print("\n" + "=" * 70)
-    print("DONE! HogBall hybrid created:")
+    print("DONE! Pig hybrid created:")
     print(f"  Preview: {OUTPUT_FILE}")
     print(f"  Blend:   {BLEND_OUTPUT}")
     print("=" * 70)

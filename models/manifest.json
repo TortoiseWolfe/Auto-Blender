@@ -1,0 +1,179 @@
+{
+  "version": "1.0",
+  "description": "Model attribution manifest for Auto-Blender project",
+  "models": {
+    "cc0": [
+      {
+        "file": "cc0/quaternius_pig.blend",
+        "name": "Pig",
+        "author": "Quaternius",
+        "license": "CC0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "quaternius.com",
+        "source_url": "https://quaternius.com/packs/farmpack.html",
+        "attribution_required": false
+      }
+    ],
+    "cc-by": [
+      {
+        "file": "cc-by/polypizza/hog_aya_kawa.glb",
+        "name": "Hog",
+        "author": "Aya Kawa",
+        "license": "CC-BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/",
+        "source": "Poly Pizza",
+        "source_url": "https://poly.pizza/m/5CHg_vV9IJH",
+        "attribution_required": true,
+        "attribution_text": "\"Hog\" by Aya Kawa [CC-BY](https://creativecommons.org/licenses/by/3.0/) via [Poly Pizza](https://poly.pizza/m/5CHg_vV9IJH)"
+      },
+      {
+        "file": "cc-by/polypizza/pig_poly_google_1.glb",
+        "name": "Pig",
+        "author": "Poly by Google",
+        "license": "CC-BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/",
+        "source": "Poly Pizza",
+        "source_url": "https://poly.pizza/m/6XC3XssJIU_",
+        "attribution_required": true,
+        "attribution_text": "\"Pig\" by Poly by Google [CC-BY](https://creativecommons.org/licenses/by/3.0/) via [Poly Pizza](https://poly.pizza/m/6XC3XssJIU_)"
+      },
+      {
+        "file": "cc-by/polypizza/pig_poly_google_2.glb",
+        "name": "Pig",
+        "author": "Poly by Google",
+        "license": "CC-BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/",
+        "source": "Poly Pizza",
+        "source_url": "https://poly.pizza/m/brcb6xLELnz",
+        "attribution_required": true,
+        "attribution_text": "\"Pig\" by Poly by Google [CC-BY](https://creativecommons.org/licenses/by/3.0/) via [Poly Pizza](https://poly.pizza/m/brcb6xLELnz)"
+      },
+      {
+        "file": "cc-by/polypizza/pig_poly_google_3.glb",
+        "name": "Pig",
+        "author": "Poly by Google",
+        "license": "CC-BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/",
+        "source": "Poly Pizza",
+        "source_url": "https://poly.pizza/m/6yc3isbjZST",
+        "attribution_required": true,
+        "attribution_text": "\"Pig\" by Poly by Google [CC-BY](https://creativecommons.org/licenses/by/3.0/) via [Poly Pizza](https://poly.pizza/m/6yc3isbjZST)"
+      },
+      {
+        "file": "cc-by/polypizza/pig_quaternius_1.glb",
+        "name": "Pig",
+        "author": "Quaternius",
+        "license": "CC-BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/",
+        "source": "Poly Pizza",
+        "source_url": "https://poly.pizza/m/TNvG3QUFlp",
+        "attribution_required": true,
+        "attribution_text": "\"Pig\" by Quaternius [CC-BY](https://creativecommons.org/licenses/by/3.0/) via [Poly Pizza](https://poly.pizza/m/TNvG3QUFlp)"
+      },
+      {
+        "file": "cc-by/polypizza/pig_quaternius_2.glb",
+        "name": "Pig",
+        "author": "Quaternius",
+        "license": "CC-BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/",
+        "source": "Poly Pizza",
+        "source_url": "https://poly.pizza/m/u35l6uP5vj",
+        "attribution_required": true,
+        "attribution_text": "\"Pig\" by Quaternius [CC-BY](https://creativecommons.org/licenses/by/3.0/) via [Poly Pizza](https://poly.pizza/m/u35l6uP5vj)"
+      },
+      {
+        "file": "cc-by/polypizza/pig_jeremy.glb",
+        "name": "Pig",
+        "author": "jeremy",
+        "license": "CC-BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/",
+        "source": "Poly Pizza",
+        "source_url": "https://poly.pizza/m/bbPhEBl5Bh0",
+        "attribution_required": true,
+        "attribution_text": "\"Pig\" by jeremy [CC-BY](https://creativecommons.org/licenses/by/3.0/) via [Poly Pizza](https://poly.pizza/m/bbPhEBl5Bh0)"
+      },
+      {
+        "file": "cc-by/polypizza/boar_poly_google.glb",
+        "name": "Boar",
+        "author": "Poly by Google",
+        "license": "CC-BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/",
+        "source": "Poly Pizza",
+        "source_url": "https://poly.pizza/m/57fSWum6F1P",
+        "attribution_required": true,
+        "attribution_text": "\"Boar\" by Poly by Google [CC-BY](https://creativecommons.org/licenses/by/3.0/) via [Poly Pizza](https://poly.pizza/m/57fSWum6F1P)"
+      },
+      {
+        "file": "cc-by/polypizza/voxel_pig_mauri.glb",
+        "name": "Voxel Pig",
+        "author": "Mauri Helme",
+        "license": "CC-BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/",
+        "source": "Poly Pizza",
+        "source_url": "https://poly.pizza/m/abovMDkoWAN",
+        "attribution_required": true,
+        "attribution_text": "\"Voxel Pig\" by Mauri Helme [CC-BY](https://creativecommons.org/licenses/by/3.0/) via [Poly Pizza](https://poly.pizza/m/abovMDkoWAN)"
+      },
+      {
+        "file": "cc-by/polypizza/piggy_bank_poly_google.glb",
+        "name": "Piggy Bank",
+        "author": "Poly by Google",
+        "license": "CC-BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/",
+        "source": "Poly Pizza",
+        "source_url": "https://poly.pizza/m/dpvS2kdW6I9",
+        "attribution_required": true,
+        "attribution_text": "\"Piggy Bank\" by Poly by Google [CC-BY](https://creativecommons.org/licenses/by/3.0/) via [Poly Pizza](https://poly.pizza/m/dpvS2kdW6I9)"
+      },
+      {
+        "file": "cc-by/polypizza/piggy_bank_poly_google_2.glb",
+        "name": "Piggy Bank",
+        "author": "Poly by Google",
+        "license": "CC-BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/",
+        "source": "Poly Pizza",
+        "source_url": "https://poly.pizza/m/d1lUL18me4S",
+        "attribution_required": true,
+        "attribution_text": "\"Piggy Bank\" by Poly by Google [CC-BY](https://creativecommons.org/licenses/by/3.0/) via [Poly Pizza](https://poly.pizza/m/d1lUL18me4S)"
+      },
+      {
+        "file": "cc-by/polypizza/piggy_bank_creativetrio.glb",
+        "name": "Piggy Bank",
+        "author": "CreativeTrio",
+        "license": "CC-BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/",
+        "source": "Poly Pizza",
+        "source_url": "https://poly.pizza/m/1KAexv0Erv",
+        "attribution_required": true,
+        "attribution_text": "\"Piggy Bank\" by CreativeTrio [CC-BY](https://creativecommons.org/licenses/by/3.0/) via [Poly Pizza](https://poly.pizza/m/1KAexv0Erv)"
+      },
+      {
+        "file": "cc-by/polypizza/collared_peccary.glb",
+        "name": "Collared Peccary",
+        "author": "Poly by Google",
+        "license": "CC-BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/",
+        "source": "Poly Pizza",
+        "source_url": "https://poly.pizza/m/3eoOcw_d00X",
+        "attribution_required": true,
+        "attribution_text": "\"Collared Peccary\" by Poly by Google [CC-BY](https://creativecommons.org/licenses/by/3.0/) via [Poly Pizza](https://poly.pizza/m/3eoOcw_d00X)"
+      }
+    ],
+    "unverified": [
+      {
+        "file": "unverified/lowpoly_pig.blend",
+        "name": "Lowpoly Pig",
+        "author": "Unknown",
+        "license": "Unknown",
+        "notes": "Verify license before commercial use"
+      },
+      {
+        "file": "unverified/porco.blend",
+        "name": "Porco",
+        "author": "Unknown",
+        "license": "Unknown",
+        "notes": "Verify license before commercial use"
+      }
+    ]
+  }
+}
