@@ -1,3 +1,49 @@
+# Auto-Blender - HogBall Mascot Generator
+
+## Pig Model Download Links
+
+These sources have free/CC0 pig models. Download manually since CAPTCHA blocks automated downloads:
+
+### poly.pizza (CC-BY, requires manual download due to CAPTCHA)
+- Pig by Poly by Google: https://poly.pizza/m/6XC3XssJIU_
+- Pig by Poly by Google #2: https://poly.pizza/m/brcb6xLELnz
+- Pig by Poly by Google #3: https://poly.pizza/m/6yc3isbjZST
+- Pig by Quaternius: https://poly.pizza/m/TNvG3QUFlp
+- Pig by Quaternius #2: https://poly.pizza/m/u35l6uP5vj
+- Pig by jeremy: https://poly.pizza/m/bbPhEBl5Bh0
+- Boar by Poly by Google: https://poly.pizza/m/57fSWum6F1P
+- Hog by Aya Kawa: https://poly.pizza/m/5CHg_vV9IJH
+- Voxel Pig by Mauri Helme: https://poly.pizza/m/abovMDkoWAN
+- Piggy Bank by Poly by Google: https://poly.pizza/m/dpvS2kdW6I9
+- Piggy Bank by Poly by Google #2: https://poly.pizza/m/d1lUL18me4S
+- Piggy Bank by CreativeTrio: https://poly.pizza/m/1KAexv0Erv
+- Collared Peccary by Poly by Google: https://poly.pizza/m/3eoOcw_d00X
+
+### Quaternius (CC0, direct download)
+- Farm Animals Pack: https://quaternius.com/packs/farmpack.html
+- Ultimate Animated Animals: https://quaternius.com/packs/ultimateanimatedanimals.html
+- All Packs: https://quaternius.com/index.html
+
+### Other Sources
+- OpenGameArt Pigs: https://opengameart.org/art-search-advanced?keys=pig&field_art_type_tid%5B%5D=10
+- Sketchfab (filter CC0): https://sketchfab.com/search?features=downloadable&licenses=322a749bcfa841b29dff1571c1d5b317&licenses=b9ddc40b93e34cdca1fc152f39b9f375&q=pig&type=models
+- Kenney Animal Pack: https://kenney.nl/assets/animal-pack-redux
+- TurboSquid Free: https://www.turbosquid.com/Search/3D-Models/free/pig
+
+### Currently Downloaded (in models/ folder)
+1. `lowpoly_pig.blend` - Low poly pig model
+2. `porco.blend` - Porco pig model
+3. `Farm Animals by @Quaternius/Blends/Pig.blend` - Quaternius farm pig (also OBJ, FBX)
+
+## Usage
+
+Place downloaded GLB/GLTF/blend files in `models/polypizza/` or `models/downloads/`, then run:
+```bash
+./blender.sh scripts/compare_all_pigs.py
+```
+
+---
+
 # SpecKit Project Template
 
 Constitution  
